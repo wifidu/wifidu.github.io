@@ -29,10 +29,8 @@ AOF持久化
 
 
 Mysql
-
-
-
-关系,"> 
+主键
+引擎,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -109,24 +107,25 @@ Mysql
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="javascript:;"><b>「 </b>Article<b> 」</b></a>
+                <a href="/categories/Database"><b>「
+                    </b>DATABASE<b> 」</b></a>
                 
-                June 06, 2020
+                June 07, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/06/06/Database/" title="Database" class="">Database</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/06/07/Database/" title="Database" class="">Database</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    7.2k
+                    12k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                    7 mins.
+                    11 mins.
                 </span>
                 
                 
@@ -138,6 +137,8 @@ Mysql
                 
             </p>
             
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Database/" rel="tag">Database</a></li></ul>
             
         </div>
     </div>
@@ -176,7 +177,18 @@ Mysql
 </li>
 </ul>
 </li>
-<li><a href="#mysql">Mysql</a></li>
+<li><a href="#mysql">Mysql</a><ul>
+<li><a href="#主键">主键</a></li>
+<li><a href="#引擎">引擎</a></li>
+<li><a href="#索引">索引</a><ul>
+<li><a href="#分类">分类</a></li>
+<li><a href="#索引原理">索引原理</a></li>
+<li><a href="#聚集索引和非聚集索引">聚集索引和非聚集索引</a></li>
+<li><a href="#正确使用索引">正确使用索引</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <!-- vim-markdown-toc -->
 
@@ -324,7 +336,107 @@ dir /etc/redis
 </ul>
 <h2 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h2><p><code>mysql_secure_installation</code></p>
 <pre><code class="shell">pacman -S php-fpm libapache2-mod-php php-mysql</code></pre>
-
+<h3 id="主键"><a href="#主键" class="headerlink" title="主键"></a>主键</h3><p>表通常具有包含唯一标识表中每一行的值的一列或一组列。这样的一列或多列称为表的主键 (PK)，用于强制表的实体完整性。在创建或修改表时，您可以通过定义 PRIMARY KEY 约束来创建主键。</p>
+<blockquote>
+<p>创建主键时，数据库引擎 会自动创建唯一的索引来强制实施 PRIMARY KEY 约束的唯一性要求。如果表中不存在聚集索引或未显式指定非聚集索引，则将创建唯一的聚集索引以强制实施 PRIMARY KEY 约束。</p>
+</blockquote>
+<h3 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a>引擎</h3><p>InnoDB 支持事务，支持行级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引；<br>MyISAM 不支持事务，支持表级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引；<br>Memory 不支持事务，支持表级别锁定，支持 B-tree、Hash 等索引，不支持 Full-text 索引；<br>NDB 支持事务，支持行级别锁定，支持 Hash 索引，不支持 B-tree、Full-text 等索引；<br>Archive 不支持事务，支持表级别锁定，不支持 B-tree、Hash、Full-text 等索引；</p>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><p>我们可以在创建上述索引的时候，为其指定索引类型，分两类:</p>
+<ul>
+<li>hash类型的索引：查询单条快，范围查询慢</li>
+<li>btree类型的索引：b+树，层数越多，数据量指数级增长（我们就用它，因为innodb默认支持它）</li>
+</ul>
+<blockquote>
+<p>表中除了聚集索引外其他索引都是辅助索引（Secondary Index，也称为非聚集索引）（unique key啊、index key啊），与聚集索引的区别是：辅助索引的叶子节点不包含行记录的全部数据。</p>
+</blockquote>
+<p>常用索引：</p>
+<ul>
+<li><p>普通索引INDEX：加速查找</p>
+</li>
+<li><p>唯一索引：</p>
+<ul>
+<li>主键索引PRIMARY KEY：加速查找+约束（不为空、不能重复）</li>
+<li>唯一索引UNIQUE:加速查找+约束（不能重复）</li>
+</ul>
+</li>
+<li><p>联合索引：</p>
+<ul>
+<li>PRIMARY KEY(id,name):联合主键索引</li>
+<li>UNIQUE(id,name):联合唯一索引</li>
+<li>INDEX(id,name):联合普通索引</li>
+</ul>
+</li>
+</ul>
+<h4 id="索引原理"><a href="#索引原理" class="headerlink" title="索引原理"></a>索引原理</h4><p><a href="https://www.cnblogs.com/fengqiang626/archive/2019/09/04/11459434.html#1%E4%BB%8B%E7%BB%8D" target="_blank" rel="noopener">Link</a></p>
+<h4 id="聚集索引和非聚集索引"><a href="#聚集索引和非聚集索引" class="headerlink" title="聚集索引和非聚集索引"></a>聚集索引和非聚集索引</h4><blockquote>
+<p>主键索引的叶子节点存的是整行数据。在 InnoDB 里，主键索引也被称为聚集索引（clustered index）。</p>
+</blockquote>
+<blockquote>
+<p>非主键索引的叶子节点内容是主键的值。在 InnoDB 里，非主键索引也被称为二级索引（secondary index）。</p>
+</blockquote>
+<ol>
+<li><p>mysql的innodb表，就是索引组织表，表中的所有数据行都放在索引上，这就约定了数据是严格按照顺序存放的，所以不管插入的先后顺序，它在那个物理上的那个位置与插入的先后顺序无关。</p>
+</li>
+<li><p>聚集索引，叶子节点存的是整行数据，直接通过这个聚集索引的键值找到某行</p>
+</li>
+<li><p>聚集索引，数据的物理存放顺序与索引顺序是一致的，即：只要索引是相邻的，那么对应的数据一定也是相邻地存放在磁盘上的。</p>
+</li>
+<li><p>聚集索引，数据行和相邻的键值紧凑地存储在一起，因为无法同时把数据行存放在两个不同的地方，所以一个表只能有一个聚集索引。</p>
+</li>
+<li><p>非聚集索引，叶子节点存的是字段的值，通过这个非聚集索引的键值找到对应的聚集索引字段的值，再通过聚集索引键值找到表的某行，类似oracle通过键值找到rowid，再通过rowid找到行</p>
+</li>
+<li><p>mysql的innodb表，其聚集索引相当于整张表，而整张表也是聚集索引。默认通过主键聚集数据，如果没有定义主键，则选择第一个非空的唯一索引，如果没有非空唯一索引，则选择rowid来作为聚集索引</p>
+</li>
+<li><p>mysql的innodb表，因为整张表也是聚集索引，select出来的结果是顺序排序的，比如主键字段的数据插入顺序可以是5、3、4、2、1,查询时不带order by得出的结果也是按1、2、3、4、5排序</p>
+</li>
+<li><p>通俗理解</p>
+<ul>
+<li><p>聚集索引：类似新华字典正文内容本身就是一种按照一定规则排列的目录</p>
+</li>
+<li><p>非聚集索引：这种目录纯粹是目录，正文纯粹是正文的排序方式</p>
+</li>
+<li><p>每个表只能有一个聚集索引，因为目录只能按照一种方法进行排序 。</p>
+</li>
+</ul>
+</li>
+<li><p>oracle一般使用堆表，mysql的innodb是索引组织表</p>
+<ul>
+<li><p>堆表以一种显然随机的方式管理，数据插入时时存储位置是随机的，主要是数据库内部块的空闲情况决定，数据会放在最合适的地方，而不是以某种特定顺序来放置。</p>
+</li>
+<li><p>堆表的存储速度因为不用考虑排序, 所以存储速度会比较快. 但是要查找符合某个条件的记录, 就必须得读取全部的记录以便筛选。</p>
+</li>
+<li><p>堆表其索引中记录了记录所在位置的rowid，查找的时候先找索引，然后再根据索引rowid找到块中的行数据。</p>
+</li>
+<li><p>堆表的索引和表数据是分离的</p>
+</li>
+<li><p>索引组织表，其行数据以索引形式存放，因此找到索引，就等于找到了行数据。</p>
+</li>
+<li><p>索引组织表索引和数据是在一起的</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>如果语句是 select * from T where ID=500，即 主键查询方式，则只需要搜索 ID 这棵 B+树 ；</p>
+<p>如果语句是 select * from T where k=5，即 普通索引查询方式，则需要先搜索 k 索引树，得到 ID的值为 500，再到 ID 索引树搜索一次。这个过程称为回表</p>
+<p>B+ 树为了维护索引有序性，在插入新值的时候需要做必要的维护。以上面为例，如果插入新的行 ID 值为 700，则只只需要在 R5 的记录后面插入一个新记录。如果新插入的 ID值为 400，就相对麻烦了，需要逻辑上挪动后面的数据，空出位置。</p>
+<p>test1表 innodb引擎，索引和数据放在一个文件里面</p>
+<p>-rw-r—– 1 mysql mysql  8678 Nov 20 14:05 test1.frm</p>
+<p>-rw-r—– 1 mysql mysql 98304 Nov 20 16:51 test1.ibd</p>
+<p>test2表 myisam引擎，索引和数据放在不同文件</p>
+<p>-rw-r—– 1 mysql mysql  8558 Nov 22 10:22 test2.frm</p>
+<p>-rw-r—– 1 mysql mysql     0 Nov 22 10:22 test2.MYD</p>
+<p>-rw-r—– 1 mysql mysql  1024 Nov 22 10:22 test2.MYI</p>
+<p><strong>InnoDB表的行被组织成称为聚集索引的索引结构 ，条目根据表的主键列进行排序。 数据访问针对对主键列进行筛选和排序的查询进行了优化，每个索引都包含每个条目的关联主键列的副本。 修改任何主键列的值是一项昂贵的操作。 因此，InnoDB表设计的一个重要方面是选择一个主键，该主键具有在最重要的查询中使用的列，并保持主键很短，很少更改值。</strong></p>
+<blockquote>
+<p>InnoDB术语表示主键索引。 InnoDB表存储基于主键列的值进行组织，以加速涉及主键列的查询和排序。 为获得最佳性能，请根据性能最关键的查询仔细选择主键列。 因为修改聚集索引的列是一项昂贵的操作，所以选择很少或从不更新的主列。在Oracle数据库产品中，此类表称为索引组织表。</p>
+</blockquote>
+<p>每个InnoDB表都有一个称为聚集索引的特殊索引，其中存储了行的数据。通常，聚集索引与主键同义。</p>
+<p>在表上定义PRIMARY KEY时，InnoDB将其用作聚集索引 。为您创建的每个表定义主键。如果没有逻辑唯一且非空列或一组列，请添加一个新的自动增量列，其值将自动填充。</p>
+<p>如果没有为表定义PRIMARY KEY，MySQL将找到第一个UNIQUE索引，其中所有键列都是NOT NULL，而InnoDB将它用作聚集索引。</p>
+<p>如果表没有PRIMARY KEY或合适的UNIQUE索引，InnoDB会在包含行ID值的合成列内部生成名为GEN_CLUST_INDEX的隐藏聚集索引 。这些行按InnoDB分配给此类表中的行的ID排序。行ID是一个6字节的字段，在插入新行时会单调增加。因此，由行ID排序的行在物理上处于插入顺序。</p>
+<p>通过聚集索引访问行很快，因为索引搜索直接指向包含所有行数据的页面。 如果表很大，则与使用与索引记录不同的页面存储行数据的存储组织相比，聚集索引体系结构通常会保存磁盘I / O操作。</p>
+<p>除聚集索引之外的所有索引都称为辅助索引。 在InnoDB中，辅助索引中的每个记录都包含该行的主键列以及为辅助索引指定的列。 InnoDB使用此主键值来搜索聚集索引中的行。</p>
+<h4 id="正确使用索引"><a href="#正确使用索引" class="headerlink" title="正确使用索引"></a><a href="https://www.cnblogs.com/fengqiang626/archive/2019/09/04/11459434.html#7%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95" target="_blank" rel="noopener">正确使用索引</a></h4>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
                 data-autoplay="false">
@@ -372,8 +484,8 @@ dir /etc/redis
                 </div>
                 <ul>
                     <li><a href="/">5 <p>Articles</p></a></li>
-                    <li><a href="/categories">0 <p>Categories</p></a></li>
-                    <li><a href="/tags">0 <p>Tags</p></a></li>
+                    <li><a href="/categories">5 <p>Categories</p></a></li>
+                    <li><a href="/tags">5 <p>Tags</p></a></li>
                 </ul>
             </div>
             
@@ -382,7 +494,7 @@ dir /etc/redis
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>Contents</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Database-notes"><span class="toc-number">1.</span> <span class="toc-text">Database notes</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关系型数据库和非关系型数据库"><span class="toc-number">1.1.</span> <span class="toc-text">关系型数据库和非关系型数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系数据库"><span class="toc-number">1.1.1.</span> <span class="toc-text">关系数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非关系型数据库"><span class="toc-number">1.1.2.</span> <span class="toc-text">非关系型数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对比"><span class="toc-number">1.1.3.</span> <span class="toc-text">对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis"><span class="toc-number">1.2.</span> <span class="toc-text">redis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis持久化"><span class="toc-number">1.2.1.</span> <span class="toc-text">redis持久化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mysql"><span class="toc-number">1.3.</span> <span class="toc-text">Mysql</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Database-notes"><span class="toc-number">1.</span> <span class="toc-text">Database notes</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关系型数据库和非关系型数据库"><span class="toc-number">1.1.</span> <span class="toc-text">关系型数据库和非关系型数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关系数据库"><span class="toc-number">1.1.1.</span> <span class="toc-text">关系数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非关系型数据库"><span class="toc-number">1.1.2.</span> <span class="toc-text">非关系型数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对比"><span class="toc-number">1.1.3.</span> <span class="toc-text">对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis"><span class="toc-number">1.2.</span> <span class="toc-text">redis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis持久化"><span class="toc-number">1.2.1.</span> <span class="toc-text">redis持久化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mysql"><span class="toc-number">1.3.</span> <span class="toc-text">Mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主键"><span class="toc-number">1.3.1.</span> <span class="toc-text">主键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引擎"><span class="toc-number">1.3.2.</span> <span class="toc-text">引擎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#索引"><span class="toc-number">1.3.3.</span> <span class="toc-text">索引</span></a></li></ol></li></ol></li></ol>
                 </div>
             </div>
             
