@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>动态规划</title>
+      <link href="/2020/06/08/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <url>/2020/06/08/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</url>
+      
+        <content type="html"><![CDATA[<h2 id="零钱兑换-II"><a href="#零钱兑换-II" class="headerlink" title="零钱兑换 II"></a>零钱兑换 II</h2><p><strong>给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。</strong></p><ul><li>示例 1:</li></ul><pre><code>输入: amount = 5, coins = [1, 2, 5]输出: 4解释: 有四种方式可以凑成总金额:5=55=2+2+15=2+1+1+15=1+1+1+1+1</code></pre><ul><li>示例 2:</li></ul><pre><code>输入: amount = 3, coins = [2]输出: 0解释: 只用面额2的硬币不能凑成总金额3。</code></pre><ul><li>示例 3:</li></ul><pre><code>输入: amount = 10, coins = [10] 输出: 1</code></pre><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p><strong>模板：</strong></p><p>这是经典的动态编程问题。这是一个可以使用的模板：</p><ul><li>定义答案显而易见的基本情况。</li><li>制定根据简单的情况计算复杂情况的策略。</li><li>将此策略链接到基本情况。</li></ul><p><strong>例子：</strong></p><p>让我们举一个例子：amount = 11，可用硬币面值有 2 美分，5 美分和 10 美分。 请注意，硬币数量是无限的。</p><p><img src="https://github.com/wifidu/wifidu.github.io/blob/master/img/suanfa0.jpeg" alt="coins"></p><p><strong>基本情况：没有硬币或 金币 = 0</strong></p><ul><li>如果总金额为 0，那么只有一个组合情况：0。</li><li>另一个基本情况是没有硬币，若 amount &gt; 0，则组合情况为 0，若 amount == 0，则组合情况为 1。</li></ul><p><strong>2 美分：</strong></p><ul><li>让我们用一种硬币做进一步考虑：2 美分</li><li>很明显，这里可能会有 1 种或 0 种组合。偶数金额为 1 种，奇数金额为 0 种。</li><li>首先，所有金额均小于 2 美分不会受到 2 美分硬币的影响。 因此对于 amount = 0 和 amount = 1 的结果没有变化。</li></ul><blockquote><p>来源：<a href="https://leetcode-cn.com/problems/coin-change-2/solution/ling-qian-dui-huan-ii-by-leetcode/" target="_blank" rel="noopener">力扣（LeetCode）</a></p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux</title>
       <link href="/2020/06/07/Linux/"/>
       <url>/2020/06/07/Linux/</url>
