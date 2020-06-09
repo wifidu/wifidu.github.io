@@ -1,0 +1,728 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Linux - weifan</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="description" content="Linux知识笔记
+
+
+Shell
+脚本
+[Shell　输入/输出重定向](#shell　输入-输出重定向)
+
+
+查询系统负载信息
+Useful commands
+wc
+ps
+top
+
+
+
+
+She,"> 
+    <meta name="author" content="weifan"> 
+    <link rel="alternative" href="atom.xml" title="weifan" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">weifan</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="http://wifidu.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">Linux</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/Linux"><b>「
+                    </b>LINUX<b> 」</b></a>
+                
+                June 07, 2020
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/06/07/Linux/" title="Linux" class="">Linux</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    8.8k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    8 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <h1 id="Linux知识笔记"><a href="#Linux知识笔记" class="headerlink" title="Linux知识笔记"></a>Linux知识笔记</h1><!-- vim-markdown-toc Redcarpet -->
+
+<ul>
+<li><a href="#shell">Shell</a><ul>
+<li><a href="#脚本">脚本</a></li>
+<li>[Shell　输入/输出重定向](#shell　输入-输出重定向)</li>
+</ul>
+</li>
+<li><a href="#查询系统负载信息">查询系统负载信息</a></li>
+<li><a href="#useful-commands">Useful commands</a><ul>
+<li><a href="#wc">wc</a></li>
+<li><a href="#ps">ps</a></li>
+<li><a href="#top">top</a></li>
+</ul>
+</li>
+</ul>
+<!-- vim-markdown-toc -->
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><pre><code class="shell">echo -e &quot;OK! \n&quot; # -e 开启转义</code></pre>
+<pre><code class="shell">echo &quot;数组元素个数为: ${#my_array[*]}&quot;
+echo &quot;数组元素个数为: ${#my_array[@]}&quot;</code></pre>
+<ul>
+<li>拼接字符串</li>
+</ul>
+<pre><code class="shell">your_name=&quot;runoob&quot;
+# 使用双引号拼接
+greeting=&quot;hello, &quot;$your_name&quot; !&quot;
+greeting_1=&quot;hello, ${your_name} !&quot;
+echo $greeting  $greeting_1
+# 使用单引号拼接
+greeting_2=&#39;hello, &#39;$your_name&#39; !&#39;
+greeting_3=&#39;hello, ${your_name} !&#39;
+echo $greeting_2  $greeting_3</code></pre>
+<p>输出结果为：</p>
+<pre><code class="shell">hello, runoob ! hello, runoob !
+hello, runoob ! hello, ${your_name} !</code></pre>
+<ul>
+<li>获取字符串长度</li>
+</ul>
+<pre><code class="shell">string=&quot;abcd&quot;
+echo ${#string} #输出 4</code></pre>
+<ul>
+<li>提取子字符串</li>
+</ul>
+<pre><code class="shell">以下实例从字符串第 2 个字符开始截取 4 个字符：
+
+string=&quot;runoob is a great site&quot;
+echo ${string:1:4} # 输出 unoo
+注意：第一个字符的索引值为 0。</code></pre>
+<ul>
+<li>查找子字符串</li>
+</ul>
+<pre><code class="shell">查找字符 i 或 o 的位置(哪个字母先出现就计算哪个)：
+
+string=&quot;runoob is a great site&quot;
+echo `expr index &quot;$string&quot; io`  # 输出 4</code></pre>
+<table>
+<thead>
+<tr>
+<th>参数处理</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$#</td>
+<td>传递到脚本的参数个数</td>
+</tr>
+<tr>
+<td><code>$0</code></td>
+<td>当前脚本的文件名</td>
+</tr>
+<tr>
+<td><code>$n</code></td>
+<td>传递给脚本或函数的参数。n 是一个数字，表示第几个参数。例如，第一个参数是$1，第二个参数是$2。</td>
+</tr>
+<tr>
+<td>$*</td>
+<td>以一个单字符串显示所有向脚本传递的参数。                                                                                 如”$*”用「”」括起来的情况、以”$1  $2 … $n”的形式输出所有参数。</td>
+</tr>
+<tr>
+<td>$$</td>
+<td>脚本运行的当前进程ID号</td>
+</tr>
+<tr>
+<td>$!</td>
+<td>后台运行的最后一个进程的ID号</td>
+</tr>
+<tr>
+<td>$@</td>
+<td>与$*相同，但是使用时加引号，并在引号中返回每个参数。如”$@”用「”」括起来的情况、以”$1” “$2” … “$n” 的形式输出所有参数。</td>
+</tr>
+<tr>
+<td>$-</td>
+<td>显示Shell使用的当前选项，与set命令功能相同。</td>
+</tr>
+<tr>
+<td>$?</td>
+<td>显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。或返回值。</td>
+</tr>
+</tbody></table>
+<h3 id="Shell-输入-输出重定向"><a href="#Shell-输入-输出重定向" class="headerlink" title="Shell　输入/输出重定向"></a><a href="https://www.runoob.com/linux/linux-shell-io-redirections.html" target="_blank" rel="noopener">Shell　输入/输出重定向</a></h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>command &gt; file</td>
+<td>将输出重定向到 file。</td>
+</tr>
+<tr>
+<td>command &lt; file</td>
+<td>将输入重定向到 file。</td>
+</tr>
+<tr>
+<td>command &gt;&gt; file</td>
+<td>将输出以追加的方式重定向到 file。</td>
+</tr>
+<tr>
+<td>n &gt; file</td>
+<td>将文件描述符为 n 的文件重定向到 file。</td>
+</tr>
+<tr>
+<td>n &gt;&gt; file</td>
+<td>将文件描述符为 n 的文件以追加的方式重定向到 file。</td>
+</tr>
+<tr>
+<td>n &gt;&amp; m</td>
+<td>将输出文件 m 和 n 合并。</td>
+</tr>
+<tr>
+<td>n &lt;&amp; m</td>
+<td>将输入文件 m 和 n 合并。</td>
+</tr>
+<tr>
+<td>&lt;&lt; tag</td>
+<td>将开始标记 tag 和结束标记 tag 之间的内容作为输入。</td>
+</tr>
+</tbody></table>
+<p>一般情况下，每个 Unix/Linux 命令运行时都会打开三个文件：</p>
+<ul>
+<li>标准输入文件(stdin)：stdin的文件描述符为0，Unix程序默认从stdin读取数据。</li>
+<li>标准输出文件(stdout)：stdout 的文件描述符为1，Unix程序默认向stdout输出数据。</li>
+<li>标准错误文件(stderr)：stderr的文件描述符为2，Unix程序会向stderr流中写入错误信息。</li>
+</ul>
+<p>如果希望将 stdout 和 stderr 合并后重定向到 file，可以这样写：</p>
+<pre><code class="shell">$ command &gt; file 2&gt;&amp;1
+
+或者
+
+$ command &gt;&gt; file 2&gt;&amp;1</code></pre>
+<p>如果希望执行某个命令，但又不希望在屏幕上显示输出结果，那么可以将输出重定向到 <code>/dev/null</code>：</p>
+<blockquote>
+<p>/dev/null 是一个特殊的文件，写入到它的内容都会被丢弃；如果尝试从该文件读取内容，那么什么也读不到。但是 /dev/null 文件非常有用，将命令的输出重定向到它，会起到”禁止输出”的效果。</p>
+</blockquote>
+<pre><code class="shell">$ command &gt; /dev/null</code></pre>
+<p>如果希望屏蔽 stdout 和 stderr，可以这样写：</p>
+<pre><code class="shell">$ command &gt; /dev/null 2&gt;&amp;1</code></pre>
+<h2 id="查询系统负载信息"><a href="#查询系统负载信息" class="headerlink" title="查询系统负载信息"></a>查询系统负载信息</h2><blockquote>
+<p>manjaro linux : <code>pacman -S net-tools</code></p>
+</blockquote>
+<p><code>uptime</code> load average后面的三个数分别是1分钟、5分钟、15分钟的负载情况。</p>
+<p><a href="https://www.cnblogs.com/EasonJim/p/8098532.html" target="_blank" rel="noopener">Linux查看某个端口的连接数</a></p>
+<p><a href="https://www.cnblogs.com/ftl1012/p/netstat.html" target="_blank" rel="noopener">netstat</a></p>
+<h2 id="Useful-commands"><a href="#Useful-commands" class="headerlink" title="Useful commands"></a>Useful commands</h2><h3 id="wc"><a href="#wc" class="headerlink" title="wc"></a><a href="https://www.runoob.com/linux/linux-comm-wc.html" target="_blank" rel="noopener">wc</a></h3><blockquote>
+<p>wc命令用于计算字数。</p>
+</blockquote>
+<p><strong>语法</strong></p>
+<pre><code>wc [-clw][--help][--version][文件...]</code></pre><ul>
+<li>-c或–bytes或–chars 只显示Bytes数。</li>
+<li>-l或–lines 只显示行数。</li>
+<li>-w或–words 只显示字数。</li>
+<li>–help 在线帮助。</li>
+<li>–version 显示版本信息。</li>
+</ul>
+<p><strong>e.g.</strong></p>
+<pre><code class="shell">$ wc testfile           # testfile文件的统计信息  
+3 92 598 testfile       # testfile文件的行数为3、单词数92、字节数598</code></pre>
+<h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a><a href="https://www.runoob.com/linux/linux-comm-ps.html" target="_blank" rel="noopener">ps</a></h3><p><strong>语法</strong></p>
+<pre><code>ps [options] [--help]</code></pre><p><strong>e.g.</strong></p>
+<pre><code class="shell"># ps -ef //显示所有命令，连带命令行
+UID    PID PPID C STIME TTY     TIME CMD
+root     1   0 0 10:22 ?    00:00:02 /sbin/init
+root     2   0 0 10:22 ?    00:00:00 [kthreadd]
+root     3   2 0 10:22 ?    00:00:00 [migration/0]
+root     4   2 0 10:22 ?    00:00:00 [ksoftirqd/0]
+root     5   2 0 10:22 ?    00:00:00 [watchdog/0]
+root     6   2 0 10:22 ?    /usr/lib/NetworkManager
+……省略部分结果
+root   31302 2095 0 17:42 ?    00:00:00 sshd: root@pts/2 
+root   31374 31302 0 17:42 pts/2  00:00:00 -bash
+root   31400   1 0 17:46 ?    00:00:00 /usr/bin/python /usr/sbin/aptd
+root   31407 31374 0 17:48 pts/2  00:00:00 ps -ef</code></pre>
+<h3 id="top"><a href="#top" class="headerlink" title="top"></a><a href="https://www.runoob.com/w3cnote/linux-common-command-2.html" target="_blank" rel="noopener">top</a></h3><p><strong>语法</strong></p>
+<pre><code>-c 显示完整的进程命令
+-s 保密模式
+-p &lt;进程号&gt; 指定进程显示
+-n &lt;次数&gt;循环显示次数</code></pre><p><strong>e.g.</strong></p>
+<pre><code class="shell">top - 14:06:23 up 70 days, 16:44,  2 users,  load average: 1.25, 1.32, 1.35
+Tasks: 206 total,   1 running, 205 sleeping,   0 stopped,   0 zombie
+Cpu(s):  5.9%us,  3.4%sy,  0.0%ni, 90.4%id,  0.0%wa,  0.0%hi,  0.2%si,  0.0%st
+Mem:  32949016k total, 14411180k used, 18537836k free,   169884k buffers
+Swap: 32764556k total,        0k used, 32764556k free,  3612636k cached
+PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND  
+28894 root      22   0 1501m 405m  10m S 52.2  1.3   2534:16 java  </code></pre>
+<p>前五行是当前系统情况整体的统计信息区。</p>
+<ul>
+<li><p>第一行，任务队列信息，同 uptime 命令的执行结果，具体参数说明情况如下：</p>
+<p>14:06:23 — 当前系统时间</p>
+<p>up 70 days, 16:44 — 系统已经运行了70天16小时44分钟（在这期间系统没有重启过的吆！）</p>
+<p>2 users — 当前有2个用户登录系统</p>
+<p>load average: 1.15, 1.42, 1.44 — load average后面的三个数分别是1分钟、5分钟、15分钟的负载情况。</p>
+<p>load average数据是每隔5秒钟检查一次活跃的进程数，然后按特定算法计算出的数值。如果这个数除以逻辑CPU的数量，结果高于5的时候就表明系统在超负荷运转了。</p>
+<p><a href="https://blog.csdn.net/ztf312/article/details/80342234" target="_blank" rel="noopener"><strong>load average</strong></a></p>
+</li>
+<li><p>第二行，Tasks — 任务（进程），具体信息说明如下：</p>
+<p>系统现在共有206个进程，其中处于运行中的有1个，205个在休眠（sleep），stoped状态的有0个，zombie状态（僵尸）的有0个。</p>
+</li>
+<li><p>第三行，cpu状态信息，具体属性说明如下：</p>
+</li>
+</ul>
+<pre><code>5.9%us — 用户空间占用CPU的百分比。
+3.4% sy — 内核空间占用CPU的百分比。
+0.0% ni — 改变过优先级的进程占用CPU的百分比
+90.4% id — 空闲CPU百分比
+0.0% wa — IO等待占用CPU的百分比
+0.0% hi — 硬中断（Hardware IRQ）占用CPU的百分比
+0.2% si — 软中断（Software Interrupts）占用CPU的百分比</code></pre><p>备注：在这里CPU的使用比率和windows概念不同，需要理解linux系统用户空间和内核空间的相关知识！</p>
+<p>第四行，内存状态，具体信息如下：</p>
+<pre><code>32949016k total — 物理内存总量（32GB）
+14411180k used — 使用中的内存总量（14GB）
+18537836k free — 空闲内存总量（18GB）
+169884k buffers — 缓存的内存量 （169M）</code></pre><p>第六行，空行。</p>
+<p>第七行以下：各进程（任务）的状态监控，项目列信息说明如下：</p>
+<pre><code>PID — 进程id
+USER — 进程所有者
+PR — 进程优先级
+NI — nice值。负值表示高优先级，正值表示低优先级
+VIRT — 进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES
+RES — 进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA
+SHR — 共享内存大小，单位kb
+S — 进程状态。D=不可中断的睡眠状态 R=运行 S=睡眠 T=跟踪/停止 Z=僵尸进程
+%CPU — 上次更新到现在的CPU时间占用百分比
+%MEM — 进程使用的物理内存百分比
+TIME+ — 进程使用的CPU时间总计，单位1/100秒
+COMMAND — 进程名称（命令名/命令行）
+top 交互命令</code></pre><pre><code>h 显示top交互命令帮助信息
+c 切换显示命令名称和完整命令行
+m 以内存使用率排序
+P 根据CPU使用百分比大小进行排序
+T 根据时间/累计时间进行排序
+W 将当前设置写入~/.toprc文件中
+o或者O 改变显示项目的顺序</code></pre>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='ec894e2b66f752e8b7fb'
+        data-cs='3ccc2e92bb350688fe2c2dc2930189b62622bfb1'
+        data-r='blog-comments'
+        data-o='TriDiamond'
+        data-a='TriDiamond'
+        data-d=''
+    >Comments</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="/img/mei.jpeg" height=300 width=300></img>
+                    <p>weifan</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/wifidu" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">6 <p>Articles</p></a></li>
+                    <li><a href="/categories">6 <p>Categories</p></a></li>
+                    <li><a href="/tags">6 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux知识笔记"><span class="toc-number">1.</span> <span class="toc-text">Linux知识笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Shell"><span class="toc-number">1.1.</span> <span class="toc-text">Shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#脚本"><span class="toc-number">1.1.1.</span> <span class="toc-text">脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shell-输入-输出重定向"><span class="toc-number">1.1.2.</span> <span class="toc-text">Shell　输入&#x2F;输出重定向</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查询系统负载信息"><span class="toc-number">1.2.</span> <span class="toc-text">查询系统负载信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Useful-commands"><span class="toc-number">1.3.</span> <span class="toc-text">Useful commands</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#wc"><span class="toc-number">1.3.1.</span> <span class="toc-text">wc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ps"><span class="toc-number">1.3.2.</span> <span class="toc-text">ps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#top"><span class="toc-number">1.3.3.</span> <span class="toc-text">top</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            weifan
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.3" target="_blank" rel="noopener">v1.4.3</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>
