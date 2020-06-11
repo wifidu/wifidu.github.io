@@ -10,11 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="零钱兑换 II给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。
-
-示例 1:
-
-输入: amount = 5, coins = [1, 2, ,"> 
+    <meta name="description" content="动态规划与分治法类似，都是把大问题拆分成小问题，通过寻找大问题与小问题的递推关系，解决一个个小问题，最终达到解决原问题的效果。但不同的是，分治法在子问题和子子问题等上被重复计算了很多次，而动态规划则,"> 
     <meta name="author" content="weifan"> 
     <link rel="alternative" href="atom.xml" title="weifan" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -103,13 +99,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    4.1k
+                    9.1k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                    4 mins.
+                    8 mins.
                 </span>
                 
                 
@@ -143,7 +139,11 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <h2 id="零钱兑换-II"><a href="#零钱兑换-II" class="headerlink" title="零钱兑换 II"></a>零钱兑换 II</h2><p><strong>给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。</strong></p>
+            <p><strong>动态规划与分治法类似，都是把大问题拆分成小问题，通过寻找大问题与小问题的递推关系，解决一个个小问题，最终达到解决原问题的效果。但不同的是，分治法在子问题和子子问题等上被重复计算了很多次，而动态规划则具有记忆性，通过填写表把所有已经解决的子问题答案纪录下来，在新问题里需要用到的子问题可以直接提取，避免了重复计算，从而节约了时间，所以在问题满足最优性原理之后，用动态规划解决问题的核心就在于填表，表填写完毕，最优解也就找到。</strong></p>
+<blockquote>
+<p>采用动态规划，必须要知道初始状态和状态转移方程。</p>
+</blockquote>
+<h2 id="零钱兑换-II"><a href="#零钱兑换-II" class="headerlink" title="零钱兑换 II"></a>零钱兑换 II</h2><p><strong>给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。</strong></p>
 <ul>
 <li>示例 1:</li>
 </ul>
@@ -224,7 +224,7 @@
 </li>
 <li>返回 <code>dp[amount]</code>。</li>
 </ul>
-<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>因为我们使用的是一维数组，后面的结果将覆盖前面的结果，所以<code>dp[x] += dp[x - coin]</code>并不是巧合或单纯找规律，而是:</p>
+<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>因为我们使用的是一维数组，后面的结果将覆盖前面的结果，所以<code>dp[x] += dp[x - coin]</code>并不是巧合或单纯看图找规律，而是:</p>
 <blockquote>
 <p>我们将第 <code>i - 1</code> 个硬币记作<code>A</code>, 第 <code>i</code> 个硬币记为<code>B</code></p>
 </blockquote>
@@ -250,12 +250,116 @@
 <blockquote>
 <p>来源：<a href="https://leetcode-cn.com/problems/coin-change-2/solution/ling-qian-dui-huan-ii-by-leetcode/" target="_blank" rel="noopener">力扣（LeetCode）</a></p>
 </blockquote>
+<h2 id="背包问题"><a href="#背包问题" class="headerlink" title="背包问题"></a>背包问题</h2><blockquote>
+<p>背包问题上限为<code>重量</code>,硬币上限为<code>金额</code>。</p>
+</blockquote>
+<blockquote>
+<p>参考: <a href="https://www.cnblogs.com/fengziwei/p/7750849.html" target="_blank" rel="noopener">1</a> <a href="https://blog.csdn.net/chanmufeng/article/details/82955730" target="_blank" rel="noopener">2</a></p>
+</blockquote>
+<h3 id="0-1背包"><a href="#0-1背包" class="headerlink" title="0-1背包"></a>0-1背包</h3><p>采用动态规划，必须要知道初始状态和状态转移方程。</p>
+<p>初始状态很容易就能知道，那么状态转移方程如何求呢？对于一件物品，我们有放进或者不放进背包两种选择：</p>
+<ol>
+<li><p>假如我们放进背包，<code>f[i][j] = f[i - 1][j - weight[i]] + value[i]</code>，这里的f[i - 1][j - weight[i]] + value[i]应该这么理解：在没放这件物品之前的状态值加上要放进去这件物品的价值。而对于f[i - 1][j - weight[i]]这部分，i - 1很容易理解，关键是 j - weight[i]这里，我们要明白：要把这件物品放进背包，就得在背包里面预留这一部分空间。</p>
+</li>
+<li><p>假如我们不放进背包，f[i][j] = f[i - 1][j]，这个很容易理解。</p>
+</li>
+</ol>
+<p>因此，我们的状态转移方程就是：<code>f[i][j] = max(f[i][j] = f[i - 1][j] , f[i - 1][j - weight[i]] + value[i])</code></p>
+<p>当然，还有一种特殊的情况，就是背包放不下当前这一件物品，这种情况下 <code>f[i][j] = f[i - 1][j]</code> 。</p>
+<pre><code class="java">public class KnapSack01 {
+    public static int knapSack(int[] w, int[] v, int C) {
+        int size = w.length;
+        if (size == 0) {
+            return 0;
+        }
+
+        int[][] dp = new int[size][C + 1];
+        //初始化第一行
+        //仅考虑容量为C的背包放第0个物品的情况
+        for (int i = 0; i &lt;= C; i++) {
+            dp[0][i] = w[0] &lt;= i ? v[0] : 0;
+        }
+        //填充其他行和列
+        for (int i = 1; i &lt; size; i++) {
+            for (int j = 0; j &lt;= C; j++) {
+                dp[i][j] = dp[i - 1][j];
+                if (w[i] &lt;= j) {
+                    dp[i][j] = Math.max(dp[i][j], v[i] + dp[i - 1][j - w[i]]);
+                }
+            }
+        }
+        return dp[size - 1][C];
+    }
+
+    public static void main(String[] args) {
+        int[] w = {2, 1, 3, 2};
+        int[] v = {12, 10, 20, 15};
+        System.out.println(knapSack(w, v, 5));
+    }
+}</code></pre>
+<p><strong>空间复杂度优化</strong></p>
+<p>我们可以知道，当我们利用一维数组进行记忆化的时候，我们只需要使用到当前位置的值和该位置之前的值，举个例子<br>假设我们要计算F(i,4)F(i,4)F(i,4),我们需要用到的值为F(i−1,4)F(i-1,4)F(i−1,4)和F(i−1,4−w(i))F(i-1,4-w(i))F(i−1,4−w(i)),因此为了防止结果被覆盖，我们需要从后向前依次计算结果</p>
+<pre><code class="java">public class KnapSack01 {
+    public static int knapSack(int[] w, int[] v, int C) {
+        int size = w.length;
+        if (size == 0) {
+            return 0;
+        }
+
+        int[] dp = new int[C + 1];
+        //初始化第一行
+        //仅考虑容量为C的背包放第0个物品的情况
+        for (int i = 0; i &lt;= C; i++) {
+            dp[i] = w[0] &lt;= i ? v[0] : 0;
+        }
+
+        for (int i = 1; i &lt; size; i++) {
+            for (int j = C; j &gt;= w[i]; j--) {
+                dp[j] = Math.max(dp[j], v[i] + dp[j - w[i]]);
+            }
+        }
+        return dp[C];
+    }
+
+    public static void main(String[] args) {
+        int[] w = {2, 1, 3, 2};
+        int[] v = {12, 10, 20, 15};
+        System.out.println(knapSack(w, v, 5));
+    }
+}</code></pre>
+<p>其中有一段代码优化之前如下:</p>
+<pre><code class="java">    for (int i = 1; i &lt;= n; i++) {
+        for (int j = m; j &gt;= 1; j--) {
+            if (weight[i] &lt;= j) {
+                f[j] = f[j] &gt; f[j - weight[i]] + value[i] ? f[j] : f[j - weight[i]] + value[i];
+            }
+        }
+    }</code></pre>
+<h3 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h3><p>完全背包问题是指每种物品都有无限件</p>
+<h3 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h3><p>多重背包问题限定了一种物品的个数，解决多重背包问题，只需要把它转化为0-1背包问题即可。比如，有2件价值为5，重量为2的同一物品，我们就可以分为物品a和物品b，a和b的价值都为5，重量都为2，但我们把它们视作不同的物品。</p>
 <h2 id="最大子序和"><a href="#最大子序和" class="headerlink" title="最大子序和"></a>最大子序和</h2><p><strong>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</strong></p>
 <p><strong>示例:</strong></p>
 <pre><code>输入: [-2,1,-3,4,-1,2,1,-5,4],
 输出: 6
 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。</code></pre><p><strong>进阶:</strong></p>
 <p>如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。</p>
+<h3 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h3><p>假设 nums 数组的长度是 n，下标从 0 到 n - 1。</p>
+<p>我们用 ai 代表 nums[i]，用 f(i) 代表以第 i 个数结尾的「连续子数组的最大和」，那么很显然我们要求的答案就是：</p>
+<p><code>max {f(i)} 0≤i≤n−1</code></p>
+<p>因此我们只需要求出每个位置的 f(i)，然后返回 f 数组中的最大值即可。那么我们如何求 f(i) 呢？我们可以考虑 ai<br>单独成为一段还是加入 f(i - 1) 对应的那一段，这取决于 ai 和 f(i - 1) + ai<br>的大小，我们希望获得一个比较大的，于是可以写出这样的动态规划转移方程：</p>
+<p><code>f(i) = max { f(i - 1) + ai, ai }</code></p>
+<p>不难给出一个时间复杂度 O(n)、空间复杂度 O(n) 的实现，即用一个 f 数组来保存 f(i) 的值，用一个循环求出所有 f(i)。考虑到 f(i) 只和<br>f(i - 1) 相关，于是我们可以只用一个变量 pre 来维护对于当前 f(i) 的 f(i−1) 的值是多少，从而让空间复杂度降低到 O(1)，这有点类似「滚动<br>数组」的思想。</p>
+<pre><code class="javascript">var maxSubArray = function(nums) {
+    let pre = 0, maxAns = nums[0];
+    nums.forEach((x) =&gt; {
+        pre = Math.max(pre + x, x);
+        maxAns = Math.max(maxAns, pre);
+    });
+    return maxAns;
+};</code></pre>
+<p>复杂度</p>
+<p>时间复杂度：O(n)，其中 n 为 nums 数组的长度。我们只需要遍历一遍数组即可求得答案。<br>空间复杂度：O(1)。我们只需要常数空间存放若干变量。</p>
+<p>来源：<a href="https://leetcode-cn.com/problems/maximum-subarray/solution/zui-da-zi-xu-he-by-leetcode-solution/" target="_blank" rel="noopener">力扣（LeetCode）</a></p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -314,7 +418,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>Contents</h4>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#零钱兑换-II"><span class="toc-number">1.</span> <span class="toc-text">零钱兑换 II</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#题解"><span class="toc-number">1.1.</span> <span class="toc-text">题解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conclusion"><span class="toc-number">1.2.</span> <span class="toc-text">Conclusion</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最大子序和"><span class="toc-number">2.</span> <span class="toc-text">最大子序和</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#零钱兑换-II"><span class="toc-number">1.</span> <span class="toc-text">零钱兑换 II</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#题解"><span class="toc-number">1.1.</span> <span class="toc-text">题解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conclusion"><span class="toc-number">1.2.</span> <span class="toc-text">Conclusion</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背包问题"><span class="toc-number">2.</span> <span class="toc-text">背包问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-1背包"><span class="toc-number">2.1.</span> <span class="toc-text">0-1背包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完全背包"><span class="toc-number">2.2.</span> <span class="toc-text">完全背包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多重背包"><span class="toc-number">2.3.</span> <span class="toc-text">多重背包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最大子序和"><span class="toc-number">3.</span> <span class="toc-text">最大子序和</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#题解-1"><span class="toc-number">3.1.</span> <span class="toc-text">题解</span></a></li></ol></li></ol>
                 </div>
             </div>
             
