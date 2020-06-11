@@ -59,7 +59,7 @@
 <div id="top" style="display: block;">
     <div class="bar" style="width: 0;"></div>
     <div class="navigation animated fadeIn fast delay-1s">
-        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="http://wifidu.github.io">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://wifidu.gitee.io">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
         <h3 class="subtitle">动态规划</h3>
         <div class="social">
@@ -103,13 +103,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    1.4k
+                    4.1k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                    1 mins.
+                    4 mins.
                 </span>
                 
                 
@@ -177,15 +177,85 @@
 <li>如果总金额为 0，那么只有一个组合情况：0。</li>
 <li>另一个基本情况是没有硬币，若 amount &gt; 0，则组合情况为 0，若 amount == 0，则组合情况为 1。</li>
 </ul>
+<p><img src="/img/suanfa1.jpeg" alt="基本情况"></p>
 <p><strong>2 美分：</strong></p>
 <ul>
 <li>让我们用一种硬币做进一步考虑：2 美分</li>
+</ul>
+<p><img src="/img/suanfa2.png" alt="2 美分"></p>
+<ul>
 <li>很明显，这里可能会有 1 种或 0 种组合。偶数金额为 1 种，奇数金额为 0 种。</li>
 <li>首先，所有金额均小于 2 美分不会受到 2 美分硬币的影响。 因此对于 amount = 0 和 amount = 1 的结果没有变化。</li>
+<li>amount = 2 开始，可以使用 2 美分硬币进行组合。</li>
+<li>我们使用 2 美分硬币来组合 amount = 2，则金额 2 美分的组合数等于 amount = 0 的组合数量，即 1。</li>
+</ul>
+<p><img src="/img/suanfa3.jpeg" alt="1"></p>
+<ul>
+<li>同理 amount = 3 的组合数量等于 amount = 1 的组合数量，即 0。</li>
+</ul>
+<p><img src="/img/suanfa4.jpeg" alt="0"></p>
+<ul>
+<li>我们可以推到出 <code>DP</code> 公式为 <code>amount = x: dp[x] = dp[x] + dp[x - coin]</code>，其中 coin = 2 美分，是当前甜腻骄傲硬币的价值。</li>
+</ul>
+<p><img src="/img/suanfa5.jpeg" alt="2"></p>
+<p><strong>2 美分 + 5 美分 + 10 美分：</strong></p>
+<ul>
+<li>我们先增加 5 美分的情况，公式是一样的。</li>
+</ul>
+<p><img src="/img/suanfa6.jpeg" alt="5"></p>
+<ul>
+<li>对于 10 美分也是一样的。</li>
+</ul>
+<p><img src="/img/suanfa7.jpeg" alt="10"></p>
+<p>策略为：</p>
+<ul>
+<li>从基本情况没有硬币开始，一一添加硬币。</li>
+<li>对于每个添加的硬币，我们从金额 0 到 amount 递归的计算组合数量。</li>
+</ul>
+<p><strong>算法:</strong></p>
+<ul>
+<li>以基本情况没有硬币开始组合数量。<code>dp[0] = 1</code>，然后其余等于 <code>0</code>。</li>
+<li>遍历所有硬币面值：<ul>
+<li>对于每个硬币，我们将从金额 0 遍历到 amount：<ul>
+<li>对于每个 x，计算组合数：<code>dp[x] += dp[x - coin]</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>返回 <code>dp[amount]</code>。</li>
+</ul>
+<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>因为我们使用的是一维数组，后面的结果将覆盖前面的结果，所以<code>dp[x] += dp[x - coin]</code>并不是巧合或单纯找规律，而是:</p>
+<blockquote>
+<p>我们将第 <code>i - 1</code> 个硬币记作<code>A</code>, 第 <code>i</code> 个硬币记为<code>B</code></p>
+</blockquote>
+<p><code>dp[x - coin]</code><strong>(B’s)</strong> 已经在<code>dp[x]</code><strong>(A’s)</strong> 之前已经达到了最大组合数，现在只需要将<code>上个硬币</code>的最大组合数<br><code>dp[x]</code><strong>(A’s)</strong>，加上已经组合好的<code>dp[x - coin]</code><strong>(B’s)</strong> 就是当前的最大组合数。(Because B own coin add to<br><code>dp[x - coin]</code><strong>A or B</strong> ,and it will fit in this case)将<code>DP</code>公式解释一下就是:<br><code>dp[x]</code><em>(B’s)</em> = <code>dp[x]</code><em>(A’s)</em> + <code>dp[x - coin]</code><em>(B’s)</em></p>
+<pre><code class="java">class Solution {
+  public int change(int amount, int[] coins) {
+    int[] dp = new int[amount + 1];
+    dp[0] = 1;
+
+    for (int coin : coins) {
+      for (int x = coin; x &lt; amount + 1; ++x) {
+        dp[x] += dp[x - coin];
+      }
+    }
+    return dp[amount];
+  }
+}</code></pre>
+<p><strong>算法复杂度:</strong></p>
+<ul>
+<li>时间复杂度：O(N×amount)。其中 N 为 coins 数组的长度。</li>
+<li>空间复杂度：O(amount)，dp 数组使用的空间。</li>
 </ul>
 <blockquote>
 <p>来源：<a href="https://leetcode-cn.com/problems/coin-change-2/solution/ling-qian-dui-huan-ii-by-leetcode/" target="_blank" rel="noopener">力扣（LeetCode）</a></p>
 </blockquote>
+<h2 id="最大子序和"><a href="#最大子序和" class="headerlink" title="最大子序和"></a>最大子序和</h2><p><strong>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</strong></p>
+<p><strong>示例:</strong></p>
+<pre><code>输入: [-2,1,-3,4,-1,2,1,-5,4],
+输出: 6
+解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。</code></pre><p><strong>进阶:</strong></p>
+<p>如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -244,7 +314,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>Contents</h4>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#零钱兑换-II"><span class="toc-number">1.</span> <span class="toc-text">零钱兑换 II</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#题解"><span class="toc-number">1.1.</span> <span class="toc-text">题解</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#零钱兑换-II"><span class="toc-number">1.</span> <span class="toc-text">零钱兑换 II</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#题解"><span class="toc-number">1.1.</span> <span class="toc-text">题解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conclusion"><span class="toc-number">1.2.</span> <span class="toc-text">Conclusion</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最大子序和"><span class="toc-number">2.</span> <span class="toc-text">最大子序和</span></a></li></ol>
                 </div>
             </div>
             
