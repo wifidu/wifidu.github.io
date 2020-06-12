@@ -99,13 +99,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    9.1k
+                    12k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                    8 mins.
+                    11 mins.
                 </span>
                 
                 
@@ -256,7 +256,9 @@
 <blockquote>
 <p>参考: <a href="https://www.cnblogs.com/fengziwei/p/7750849.html" target="_blank" rel="noopener">1</a> <a href="https://blog.csdn.net/chanmufeng/article/details/82955730" target="_blank" rel="noopener">2</a></p>
 </blockquote>
-<h3 id="0-1背包"><a href="#0-1背包" class="headerlink" title="0-1背包"></a>0-1背包</h3><p>采用动态规划，必须要知道初始状态和状态转移方程。</p>
+<h3 id="0-1背包"><a href="#0-1背包" class="headerlink" title="0-1背包"></a>0-1背包</h3><p>0-1背包问题是指每一种物品都只有一件，可以选择放或者不放。现在假设有n件物品，背包承重为m。</p>
+<p>对于这种问题，我们可以采用一个二维数组去解决：f[i][j]，其中i代表加入背包的是前i件物品，j表示背包的承重，f[i][j]表示当前状态下能放进背包里面的物品的最大总价值。那么，f[n][m]就是我们的最终结果了。</p>
+<p>采用动态规划，必须要知道初始状态和状态转移方程。</p>
 <p>初始状态很容易就能知道，那么状态转移方程如何求呢？对于一件物品，我们有放进或者不放进背包两种选择：</p>
 <ol>
 <li><p>假如我们放进背包，<code>f[i][j] = f[i - 1][j - weight[i]] + value[i]</code>，这里的f[i - 1][j - weight[i]] + value[i]应该这么理解：在没放这件物品之前的状态值加上要放进去这件物品的价值。而对于f[i - 1][j - weight[i]]这部分，i - 1很容易理解，关键是 j - weight[i]这里，我们要明白：要把这件物品放进背包，就得在背包里面预留这一部分空间。</p>
@@ -335,8 +337,62 @@
             }
         }
     }</code></pre>
-<h3 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h3><p>完全背包问题是指每种物品都有无限件</p>
-<h3 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h3><p>多重背包问题限定了一种物品的个数，解决多重背包问题，只需要把它转化为0-1背包问题即可。比如，有2件价值为5，重量为2的同一物品，我们就可以分为物品a和物品b，a和b的价值都为5，重量都为2，但我们把它们视作不同的物品。</p>
+<h3 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h3><blockquote>
+<p>问题关键：因为有无限件物品，所以在<code>0-1背包</code>里<code>f[i - 1][j - weight[i]] + value[i])</code>是在<code>i - 1</code>件物品时最大组合，<br>而我们现在第<code>i</code>件有n件，所以我们需要用第<code>i</code>行的<code>j - weight</code>时候的最大组合:<code>f[i][j - weight[i]] + value[i])</code></p>
+</blockquote>
+<p><a href="https://www.pianshen.com/article/7862260614/" target="_blank" rel="noopener">参考</a></p>
+<ol>
+<li>完全背包问题的叙述如下：</li>
+</ol>
+<p>有n种物品，每种物品的单件重量为w[i]，价值为c[i]。现有一个容量为V的背包，问如何选取物品放入背包，使得背包内物品的总价值最大。其中每种物品都有无穷件。</p>
+<ol start="2">
+<li>动态规划思想</li>
+</ol>
+<p>同样令dp[i][v]表示前i件物品恰好放入容量为v的背包中能获得的最大价值。</p>
+<p>和01背包一样，完全背包问题的每种物品都有两种策略，但是也有不同点。对第i件物品来说：</p>
+<ol>
+<li>不放第i件物品，那么dp[i][v] = dp[i-1][v]，这步跟01背包是一样的。</li>
+<li>放第i件物品。这里的处理和01背包有所不同，因为01背包的每个物品只能选择一个，因此选择放第i件物品就意味着必须转移到dp[i-1][v-w[i]]这个状态；但是完全背包问题不同，完全背包如果选择放第i件物品之后并不是转移到dp[i-1][v-w[i]]这个状态；而是转移到dp[i][v-w[i]]，这是因为每种物品可以放任意件（注意有容量的限制，因此还是有限的），放了第i件物品后还可以继续放第i件物品，直到第二维的v-w[i]无法保持大于等于0为止。<ol start="3">
+<li>状态转移方程</li>
+</ol>
+</li>
+</ol>
+<p>由上面的分析可以写出状态转移方程：</p>
+<p><code>f[i] = max{f[i], f[i − weight[j]] + value[j]}</code></p>
+<p>边界：<code>dp[0][v] = 0 (0 &lt;= v &lt;= V)</code></p>
+<p>写成一维形式之后和01背包完全相同，唯一的区别在于这里v的枚举顺序是正向枚举，而01背包的一维形式中v必须是逆向枚举。完全背包的一维形式代码如下所示：</p>
+<pre><code class="c++">for(int i = 1 ; i &lt;= n ; i++){
+    for(int v = w[i]; v &lt;= V ; v++){// 正向枚举v
+        dp[v] = max(dp[v],dp[v-w[i]] + c[i]);
+    }
+}</code></pre>
+<h3 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h3><blockquote>
+<p>参考<a href="http://www.luyixian.cn/news_show_24233.aspx" target="_blank" rel="noopener">1</a></p>
+</blockquote>
+<p><strong>题目：</strong></p>
+<p>有N种物品和一个容量为V的背包。第i种物品最多有n[i]件可用，每件费用是c[i]，价值是w[i]。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。</p>
+<p><strong>基本算法：</strong></p>
+<p>这题目和完全背包问题很像。基本的方程只需将完全背包问题的方程略微一改即可，因为对于第i种物品有n[i]+1种策略：取0件，取1件，取2件…取n[i]件。令f[i][v]表示前i种物品恰放入一个容量为v的背包的最大权值。</p>
+<p><strong>状态转移方程：</strong><br><code>f[i][v]=max(f[i-1][v-k *c[i]]+k *w[i]|0&lt;=k&lt;=n[i])</code></p>
+<p>复杂度是<code>O(V *∑n[i])</code>。</p>
+<pre><code class="c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+const int MAX=1010;
+int N,V;
+int f[MAX];
+int c[MAX],w[MAX],s[MAX]; //费用和价值 
+int main()
+{
+    cin&gt;&gt;N&gt;&gt;V;
+    for(int i=1;i&lt;=N;i++)
+        cin&gt;&gt;c[i]&gt;&gt;w[i]&gt;&gt;s[i];
+    for(int i=1;i&lt;=N;i++)//N件物品
+        for(int v=V;v&gt;=c[i];v--)//背包容量——所剩费用,和01背包一样，从V到0
+            for(int k=1;k&lt;=s[i]&amp;&amp;k*c[i]&lt;=v;k++)
+                f[v]=max(f[v],f[v-k*c[i]]+k*w[i]);
+    cout&lt;&lt;f[V]&lt;&lt;endl;//为什么直接输出f[v]不用找最大的，看第一讲的初始化说明 
+}</code></pre>
 <h2 id="最大子序和"><a href="#最大子序和" class="headerlink" title="最大子序和"></a>最大子序和</h2><p><strong>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</strong></p>
 <p><strong>示例:</strong></p>
 <pre><code>输入: [-2,1,-3,4,-1,2,1,-5,4],
