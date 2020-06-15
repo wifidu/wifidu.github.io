@@ -5,27 +5,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DataStructure - weifan</title>
+    <title>回朔 - weifan</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="数据结构知识笔记
-
-
-二叉树
-遍历
-
-
-排序
-
-
-
-二叉树遍历
-已知先序和后序，不能唯一确定二叉树
-已知先序或后序，而又知中序，则能唯一确定二叉树
-先序、中序相同时，二叉树没有左子树
-后序、中序相同,"> 
+    <meta name="description" content="回溯算法实际上一个类似枚举的搜索尝试过程，主要是在搜索尝试过程中寻找问题的解，当发现已不满足求解条件时，就 “回溯” 返回，尝试别的路径。回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。但当,"> 
     <meta name="author" content="weifan"> 
     <link rel="alternative" href="atom.xml" title="weifan" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -72,7 +57,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://wifidu.gitee.io">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">DataStructure</h3>
+        <h3 class="subtitle">回朔</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -102,25 +87,25 @@
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="/categories/DataStructure"><b>「
-                    </b>DATASTRUCTURE<b> 」</b></a>
+                <a href="/categories/算法"><b>「
+                    </b>算法<b> 」</b></a>
                 
-                June 07, 2020
+                June 14, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/06/07/DataStructure/" title="DataStructure" class="">DataStructure</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/06/14/%E5%9B%9E%E6%9C%94/" title="回朔" class="">回朔</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    1.8k
+                    4.5k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                    2 mins.
+                    4 mins.
                 </span>
                 
                 
@@ -133,7 +118,7 @@
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/DataStructure/" rel="tag">DataStructure</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
             
         </div>
     </div>
@@ -154,109 +139,128 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <h1 id="数据结构知识笔记"><a href="#数据结构知识笔记" class="headerlink" title="数据结构知识笔记"></a>数据结构知识笔记</h1><!-- vim-markdown-toc Redcarpet -->
+            <p>回溯算法实际上一个类似枚举的搜索尝试过程，主要是在搜索尝试过程中寻找问题的解，当发现已不满足求解条件时，就 “回溯” 返回，尝试别的路径。回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为 “回溯点”。许多复杂的，规模较大的问题都可以使用回溯法，有“通用解题方法”的美称。</p>
+<p>回溯算法的基本思想是：从一条路往前走，能进则进，不能进则退回来，换一条路再试。</p>
+<h2 id="子集"><a href="#子集" class="headerlink" title="子集"></a>子集</h2><p>给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。</p>
+<p>说明：解集不能包含重复的子集。</p>
+<p>`<br>示例:</p>
+<p>输入: nums = [1,2,3]<br>输出:<br>[<br>  [3],<br>    [1],<br>    [2],<br>    [1,2,3],<br>    [1,3],<br>    [2,3],<br>    [1,2],<br>    []<br>]<br>`</p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p><strong>算法</strong></p>
+<blockquote>
+<p>幂集是所有长度从 0 到 n 所有子集的组合。</p>
+</blockquote>
+<p>根据定义，该问题可以看作是从序列中生成幂集。</p>
+<p>遍历 子集长度，通过 回溯 生成所有给定长度的子集。</p>
+<p><img src="/img/combinations.png" alt="combinations"></p>
+<blockquote>
+<p>回溯法是一种探索所有潜在可能性找到解决方案的算法。如果当前方案不是正确的解决方案，或者不是最后一个正确的解决方案，则回溯法通过修改上一步的值继续寻找解决方案。</p>
+</blockquote>
+<p><img src="/img/backtracking.png" alt="backtracking"></p>
+<p>算法</p>
+<p>定义一个回溯方法 <code>backtrack(first, curr)</code>，第一个参数为索引 first，第二个参数为当前子集 curr。</p>
+<p>如果当前子集构造完成，将它添加到输出集合中。</p>
+<p>否则，从 <code>first</code> 到 <code>n</code> 遍历索引 <code>i</code>。</p>
+<p>将整数 <code>nums[i]</code> 添加到当前子集 <code>curr</code>。</p>
+<p>继续向子集中添加整数：backtrack(i + 1, curr)。</p>
+<p>从 curr 中删除 nums[i] 进行回溯。</p>
+<pre><code class="java">class Solution {
+  List&lt;List&lt;Integer&gt;&gt; output = new ArrayList();
+  int n, k;
 
+  public void backtrack(int first, ArrayList&lt;Integer&gt; curr, int[] nums) {
+    // if the combination is done
+    if (curr.size() == k)
+      output.add(new ArrayList(curr));
+
+    for (int i = first; i &lt; n; ++i) {
+      // add i into the current combination
+      curr.add(nums[i]);
+      // use next integers to complete the combination
+      backtrack(i + 1, curr, nums);
+      // backtrack
+      curr.remove(curr.size() - 1);
+    }
+  }
+
+  public List&lt;List&lt;Integer&gt;&gt; subsets(int[] nums) {
+    n = nums.length;
+    for (k = 0; k &lt; n + 1; ++k) {
+      backtrack(0, new ArrayList&lt;Integer&gt;(), nums);
+    }
+    return output;
+  }
+}</code></pre>
+<p>复杂度分析</p>
+<p>时间复杂: O(N * 2^N)，生成所有子集，并复制到输出集合中。</p>
+<p>空间复杂度：O(N * 2^N)，存储所有子集，共 n 个元素，每个元素都有可能存在或者不存在。</p>
+<p>来源：<a href="https://leetcode-cn.com/problems/subsets" target="_blank" rel="noopener"> 力扣（LeetCode） </a></p>
+<h2 id="组合总和"><a href="#组合总和" class="headerlink" title="组合总和"></a>组合总和</h2><p>给定一个无重复元素的数组 <code>candidates</code> 和一个目标数 <code>target</code> ，找出 <code>candidates</code> 中所有可以使数字和为 <code>target</code> 的组合。</p>
+<p><code>candidates</code> 中的数字可以无限制重复被选取。</p>
+<p><strong>说明：</strong></p>
 <ul>
-<li><a href="#二叉树">二叉树</a><ul>
-<li><a href="#遍历">遍历</a></li>
+<li>所有数字（包括 target）都是正整数。</li>
+<li>解集不能包含重复的组合。</li>
 </ul>
-</li>
-<li><a href="#排序">排序</a></li>
-</ul>
-<!-- vim-markdown-toc -->
+<p><strong>示例 1:</strong></p>
+<pre><code>输入: candidates = [2,3,6,7], target = 7,
+所求解集为:
+[
+  [7],
+  [2,2,3]
+]</code></pre><p><strong>示例 2:</strong></p>
+<pre><code>输入: candidates = [2,3,5], target = 8,
+所求解集为:
+[
+  [2,2,2,2],
+  [2,3,3],
+  [3,5]
+]</code></pre><h3 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h3><pre><code class="python">from typing import List
 
-<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><ul>
-<li>已知先序和后序，不能唯一确定二叉树</li>
-<li>已知先序或后序，而又知中序，则能唯一确定二叉树</li>
-<li>先序、中序相同时，二叉树没有左子树</li>
-<li>后序、中序相同时，二叉树没有右子树</li>
-<li>后序、先序相同时，只有一个根节点</li>
-</ul>
-<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a><a href="https://www.cnblogs.com/Glory-D/p/7884525.html" target="_blank" rel="noopener">排序</a></h2><table>
-<thead>
-<tr>
-<th>排序方法</th>
-<th>时间复杂度（平均）</th>
-<th>时间复杂度（最坏)</th>
-<th>时间复杂度（最好)</th>
-<th>空间复杂度</th>
-<th>稳定性</th>
-<th>复杂性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>直接插入排序</td>
-<td>O(n2)</td>
-<td>O(n2)</td>
-<td>O(n)</td>
-<td>O(1)</td>
-<td>稳定</td>
-<td>简单</td>
-</tr>
-<tr>
-<td>希尔排序</td>
-<td>O(nlog2n)</td>
-<td>O(n2)</td>
-<td>O(n)</td>
-<td>O(1)</td>
-<td>不稳定</td>
-<td>较复杂</td>
-</tr>
-<tr>
-<td>直接选择排序</td>
-<td>O(n2)</td>
-<td>O(n2)</td>
-<td>O(n2)</td>
-<td>O(1)</td>
-<td>不稳定</td>
-<td>简单</td>
-</tr>
-<tr>
-<td>堆排序</td>
-<td>O(nlog2n)</td>
-<td>O(nlog2n)</td>
-<td>O(nlog2n)</td>
-<td>O(1)</td>
-<td>不稳定</td>
-<td>较复杂</td>
-</tr>
-<tr>
-<td>冒泡排序</td>
-<td>O(n2)</td>
-<td>O(n2)</td>
-<td>O(n)</td>
-<td>O(1)</td>
-<td>稳定</td>
-<td>简单</td>
-</tr>
-<tr>
-<td>快速排序</td>
-<td>O(nlog2n)</td>
-<td>O(n2)</td>
-<td>O(nlog2n)</td>
-<td>O(nlog2n)</td>
-<td>不稳定</td>
-<td>较复杂</td>
-</tr>
-<tr>
-<td>归并排序</td>
-<td>O(nlog2n)</td>
-<td>O(nlog2n)</td>
-<td>O(nlog2n)</td>
-<td>O(n)</td>
-<td>稳定</td>
-<td>较复杂</td>
-</tr>
-<tr>
-<td>基数排序</td>
-<td>O(d(n+r))</td>
-<td>O(d(n+r))</td>
-<td>O(d(n+r))</td>
-<td>O(n+r)</td>
-<td>稳定</td>
-<td>较复杂</td>
-</tr>
-</tbody></table>
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -&gt; List[List[int]]:
+        size = len(candidates)
+        if size == 0:
+            return []
+
+        # 剪枝是为了提速，在本题非必需
+        candidates.sort()
+        # 在遍历的过程中记录路径，它是一个栈
+        path = []
+        res = []
+        # 注意要传入 size ，在 range 中， size 取不到
+        self.__dfs(candidates, 0, size, path, res, target)
+        return res
+
+    def __dfs(self, candidates, begin, size, path, res, target):
+        # 先写递归终止的情况
+        if target == 0:
+            # Python 中可变对象是引用传递，因此需要将当前 path 里的值拷贝出来
+            # 或者使用 path.copy()
+            res.append(path[:])
+            return
+
+        for index in range(begin, size):
+            residue = target - candidates[index]
+            # “剪枝”操作，不必递归到下一层，并且后面的分支也不必执行
+            if residue &lt; 0:
+                break
+            path.append(candidates[index])
+            # 因为下一层不能比上一层还小，起始索引还从 index 开始
+            self.__dfs(candidates, index, size, path, res, residue)
+            path.pop()
+
+
+if __name__ == &#39;__main__&#39;:
+    candidates = [2, 3, 6, 7]
+    target = 7
+    solution = Solution()
+    result = solution.combinationSum(candidates, target)
+    print(result)
+</code></pre>
+<blockquote>
+<p><a href="https://leetcode-cn.com/problems/combination-sum/solution/hui-su-suan-fa-jian-zhi-python-dai-ma-java-dai-m-2/" target="_blank" rel="noopener">link</a></p>
+</blockquote>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -315,7 +319,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>Contents</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据结构知识笔记"><span class="toc-number">1.</span> <span class="toc-text">数据结构知识笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树"><span class="toc-number">1.1.</span> <span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历"><span class="toc-number">1.1.1.</span> <span class="toc-text">遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-number">1.2.</span> <span class="toc-text">排序</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#子集"><span class="toc-number">1.</span> <span class="toc-text">子集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#题解"><span class="toc-number">1.1.</span> <span class="toc-text">题解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组合总和"><span class="toc-number">2.</span> <span class="toc-text">组合总和</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#题解-1"><span class="toc-number">2.1.</span> <span class="toc-text">题解</span></a></li></ol></li></ol>
                 </div>
             </div>
             
