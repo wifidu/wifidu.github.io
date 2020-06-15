@@ -99,13 +99,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    4.5k
+                    5.4k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                    4 mins.
+                    5 mins.
                 </span>
                 
                 
@@ -209,6 +209,40 @@
     }
     return output;
   }
+}</code></pre>
+<pre><code class="php">class Solution {
+    protected  $output = [];
+    protected  $k;
+    protected  $n;
+     /**
+     * @param Integer[] $nums
+     * @return Integer[][]
+     */
+    function subsets($nums) {
+        $this-&gt;n = count($nums);
+
+        for ($this-&gt;k = 0; $this-&gt;k &lt; $this-&gt;n + 1; ++$this-&gt;k) {
+            $this-&gt;backtrack(0, [], $nums);
+        }
+
+        return $this-&gt;output;
+    }
+
+    function backtrack(int $first, array $curr, array $nums)
+    {
+        if (count($curr) == $this-&gt;k) {
+            array_push($this-&gt;output, $curr);
+            return;
+        }
+
+        for ($i = $first; $i &lt; $this-&gt;n; $i ++) {
+            array_push($curr, $nums[$i]);
+
+            $this-&gt;backtrack($i + 1, $curr, $nums);
+
+            array_pop($curr);
+        }
+    }
 }</code></pre>
 <p>复杂度分析</p>
 <p>时间复杂: O(N * 2^N)，生成所有子集，并复制到输出集合中。</p>
