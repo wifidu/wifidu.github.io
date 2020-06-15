@@ -169,11 +169,20 @@
 <p><img src="/img/backtracking.png" alt="backtracking"></p>
 <p>算法</p>
 <p>定义一个回溯方法 <code>backtrack(first, curr)</code>，第一个参数为索引 first，第二个参数为当前子集 curr。</p>
-<p>如果当前子集构造完成，将它添加到输出集合中。</p>
-<p>否则，从 <code>first</code> 到 <code>n</code> 遍历索引 <code>i</code>。</p>
-<p>将整数 <code>nums[i]</code> 添加到当前子集 <code>curr</code>。</p>
-<p>继续向子集中添加整数：backtrack(i + 1, curr)。</p>
-<p>从 curr 中删除 nums[i] 进行回溯。</p>
+<ul>
+<li><p>如果当前子集构造完成，将它添加到输出集合中。</p>
+</li>
+<li><p>否则，从 <code>first</code> 到 <code>n</code> 遍历索引 <code>i</code>。</p>
+<ul>
+<li><p>将整数 <code>nums[i]</code> 添加到当前子集 <code>curr</code>。</p>
+</li>
+<li><p>继续向子集中添加整数：backtrack(i + 1, curr)。</p>
+</li>
+<li><p>从 curr 中删除 nums[i] 进行回溯。</p>
+</li>
+</ul>
+</li>
+</ul>
 <pre><code class="java">class Solution {
   List&lt;List&lt;Integer&gt;&gt; output = new ArrayList();
   int n, k;
