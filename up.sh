@@ -11,14 +11,6 @@ function jindu() {
 
 echo "blog updating==>>>>>"
 hexo g -d > /dev/null 2>&1
-
-jindu
-jindu
-jindu
-jindu
-jindu
-jindu
-
 git add -A > /dev/null 2>&1
 git commit -m "$(date)-blog" > /dev/null 2>&1
 git push > /dev/null 2>&1
