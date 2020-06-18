@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="Linux知识笔记
+    <meta name="description" content="
 
 
 Shell
@@ -23,11 +23,13 @@ Useful commands
 wc
 ps
 top
+free
+df
 
 
 
 
-She,"> 
+Shel,"> 
     <meta name="author" content="weifan"> 
     <link rel="alternative" href="atom.xml" title="weifan" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -116,13 +118,13 @@ She,">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    8.8k
+                    9.7k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                    8 mins.
+                    9 mins.
                 </span>
                 
                 
@@ -156,7 +158,7 @@ She,">
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <h1 id="Linux知识笔记"><a href="#Linux知识笔记" class="headerlink" title="Linux知识笔记"></a>Linux知识笔记</h1><!-- vim-markdown-toc Redcarpet -->
+            <!-- vim-markdown-toc Redcarpet -->
 
 <ul>
 <li><a href="#shell">Shell</a><ul>
@@ -169,6 +171,8 @@ She,">
 <li><a href="#wc">wc</a></li>
 <li><a href="#ps">ps</a></li>
 <li><a href="#top">top</a></li>
+<li><a href="#free">free</a></li>
+<li><a href="#df">df</a></li>
 </ul>
 </li>
 </ul>
@@ -408,7 +412,27 @@ m 以内存使用率排序
 P 根据CPU使用百分比大小进行排序
 T 根据时间/累计时间进行排序
 W 将当前设置写入~/.toprc文件中
-o或者O 改变显示项目的顺序</code></pre>
+o或者O 改变显示项目的顺序</code></pre><h3 id="free"><a href="#free" class="headerlink" title="free"></a>free</h3><p><strong>语法</strong></p>
+<pre><code>free [-bkmotV][-s &lt;间隔秒数&gt;]</code></pre><p><strong>参数说明：</strong></p>
+<pre><code>-b 　以Byte为单位显示内存使用情况。
+-k 　以KB为单位显示内存使用情况。
+-m 　以MB为单位显示内存使用情况。
+-h 　以合适的单位显示内存使用情况，最大为三位数，自动计算对应的单位值。单位有：
+-o 　不显示缓冲区调节列。
+-s&lt;间隔秒数&gt; 　持续观察内存使用状况。
+-t 　显示内存总和列。
+-V 　显示版本信息。</code></pre><h3 id="df"><a href="#df" class="headerlink" title="df"></a>df</h3><blockquote>
+<p>df命令参数功能：检查文件系统的磁盘空间占用情况。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
+</blockquote>
+<p><strong>语法：</strong></p>
+<pre><code>df [-ahikHTm] [目录或文件名]</code></pre><p><strong>选项与参数：</strong></p>
+<pre><code>-a ：列出所有的文件系统，包括系统特有的 /proc 等文件系统；
+-k ：以 KBytes 的容量显示各文件系统；
+-m ：以 MBytes 的容量显示各文件系统；
+-h ：以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示；
+-H ：以 M=1000K 取代 M=1024K 的进位方式；
+-T ：显示文件系统类型, 连同该 partition 的 filesystem 名称 (例如 ext3) 也列出；
+-i ：不用硬盘容量，而以 inode 的数量来显示</code></pre>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
                 data-autoplay="false">
@@ -466,7 +490,7 @@ o或者O 改变显示项目的顺序</code></pre>
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>Contents</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux知识笔记"><span class="toc-number">1.</span> <span class="toc-text">Linux知识笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Shell"><span class="toc-number">1.1.</span> <span class="toc-text">Shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#脚本"><span class="toc-number">1.1.1.</span> <span class="toc-text">脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shell-输入-输出重定向"><span class="toc-number">1.1.2.</span> <span class="toc-text">Shell　输入&#x2F;输出重定向</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查询系统负载信息"><span class="toc-number">1.2.</span> <span class="toc-text">查询系统负载信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Useful-commands"><span class="toc-number">1.3.</span> <span class="toc-text">Useful commands</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#wc"><span class="toc-number">1.3.1.</span> <span class="toc-text">wc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ps"><span class="toc-number">1.3.2.</span> <span class="toc-text">ps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#top"><span class="toc-number">1.3.3.</span> <span class="toc-text">top</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Shell"><span class="toc-number">1.</span> <span class="toc-text">Shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#脚本"><span class="toc-number">1.1.</span> <span class="toc-text">脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shell-输入-输出重定向"><span class="toc-number">1.2.</span> <span class="toc-text">Shell　输入&#x2F;输出重定向</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查询系统负载信息"><span class="toc-number">2.</span> <span class="toc-text">查询系统负载信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Useful-commands"><span class="toc-number">3.</span> <span class="toc-text">Useful commands</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#wc"><span class="toc-number">3.1.</span> <span class="toc-text">wc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ps"><span class="toc-number">3.2.</span> <span class="toc-text">ps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#top"><span class="toc-number">3.3.</span> <span class="toc-text">top</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#free"><span class="toc-number">3.4.</span> <span class="toc-text">free</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#df"><span class="toc-number">3.5.</span> <span class="toc-text">df</span></a></li></ol></li></ol>
                 </div>
             </div>
             
