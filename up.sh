@@ -36,6 +36,7 @@ else
     git push > /dev/null 2>&1
     # echo "note updated successfully[>>>>>>>>>>]100%"
 you
+printf "\n"
 fi
 
 
