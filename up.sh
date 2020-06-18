@@ -12,7 +12,7 @@ git add -A > /dev/null 2>&1
 if [ $? -ne 0 ]; then
     echo "note nothing to update"
 else
-    echo "\n blog updating" -e
+    echo -e "\n blog updating"
     git commit -m "$(date)" > /dev/null 2>&1
     git push > /dev/null 2>&1
     echo "note updated successfully"
