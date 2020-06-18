@@ -319,3 +319,6 @@ df [-ahikHTm] [目录或文件名]
     -H ：以 M=1000K 取代 M=1024K 的进位方式；
     -T ：显示文件系统类型, 连同该 partition 的 filesystem 名称 (例如 ext3) 也列出；
     -i ：不用硬盘容量，而以 inode 的数量来显示
+
+
+> weifan
