@@ -1,8 +1,8 @@
 #!/bin/bash
 
-hexo g -d &&
-git add -A &&
-git commit -m $(date)"-blog"&&
+hexo g -d > /dev/null 2>&1
+git add -A > /dev/null 2>&1
+git commit -m "$(date)-blog" > /dev/null 2>&1
 git push > /dev/null 2>&1
 
 echo "blog updated successfully"
