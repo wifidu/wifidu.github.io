@@ -1,11 +1,11 @@
 #!/bin/bash
 
-$b = ''
-$i = 0
+$b=''
+$i=0
 
 function jindu() {
-  $b = #$b
-  $i += 20
+  $b=#$b
+  $i+=20
   printf "progress:[%-50s]%d%%\r" $b $i
 }
 
