@@ -28,7 +28,7 @@ cd ~/note
 git add -A > /dev/null 2>&1
 you
 if [ $? -ne 0 ]; then
-    # echo "note nothing to update"
+    echo "note nothing to update"
 else
     # echo -e "\nnote updating[>>>>>>>>==]80%"
     git commit -m "$(date)" > /dev/null 2>&1
