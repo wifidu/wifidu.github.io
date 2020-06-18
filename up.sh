@@ -1,23 +1,32 @@
 #!/bin/bash
 
-b=''
-i=0
 
-function jindu() {
-  b=#$b
-  i+=20
-  printf "progress:[%-50s]%d%%\r" $b $i
+i=0
+str='#'
+ch=('|' '\' '-' '/')
+index=0
+
+function you() {
+  printf "[%-25s][%d%%][%c]\r" $str $(($i*4)) ${ch[$index]}
+  str+='#'
+  i=`expr $i + 20`
+  let index=i%4
 }
 
+
+you
 echo "blog updating[===========]0%"
 hexo g -d > /dev/null 2>&1
 git add -A > /dev/null 2>&1
 git commit -m "$(date)-blog" > /dev/null 2>&1
 git push > /dev/null 2>&1
+you
 echo "blog updated successfully[>>>>>=======]50%"
 
+you
 cd ~/note
 git add -A > /dev/null 2>&1
+you
 if [ $? -ne 0 ]; then
     echo "note nothing to update"
 else
@@ -25,6 +34,7 @@ else
     git commit -m "$(date)" > /dev/null 2>&1
     git push > /dev/null 2>&1
     echo "note updated successfully[>>>>>>>>>>]100%"
+you
 fi
 
 
