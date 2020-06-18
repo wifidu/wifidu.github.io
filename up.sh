@@ -9,7 +9,7 @@ index=0
 function you() {
   str+='#####'
   let i+=20
-  let index=i%4
+  let index=(index+1)%4
   printf "[%-25s][%d%%][%c]\r" $str $i ${ch[$index]}
 }
 
